@@ -12,7 +12,6 @@ public class min_subLength {
                 min = Math.min(min, i - j);
             }
         }
-        
         return min == Integer.MAX_VALUE? 0 : min;
     }
 }
