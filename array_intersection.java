@@ -6,6 +6,8 @@ import java.util.HashSet;
 
 public class array_intersection {
 	public int[] intersection(int[] nums1, int[] nums2) {
+		if(nums1 == null) return nums2;
+		if(nums2 == null) return nums1;
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         int i = 0;
