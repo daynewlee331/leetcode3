@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class Valid_Parentheses {
 	public boolean isValid(String s) {
-        if(s == null || s.length() == 1) return false;
+        if(s == null || s.length() < 1) return false;
         Stack<Character> stack = new Stack<Character>(); 
         for(int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
