@@ -1,7 +1,7 @@
 package leetcode3;
 
 import java.util.Stack;
-
+/* *** *** */
 public class Valid_Parentheses {
 	public boolean isValid(String s) {
         if(s == null || s.length() < 1) return false;
