@@ -7,12 +7,8 @@ import java.util.Stack;
 
 public class remove_invalid_parentheses {
 	public static void main(String[] args){
-		String s = "a(b)((";
-		//remove_invalid_parentheses r = new remove_invalid_parentheses();
-		//HashSet<String> set = new HashSet<String>();
-		//r.stringGenerator(s, 2, set);
-		//System.out.println();
-		//r.removeInvalidParentheses(s);
+		String st = "a(b)((";
+		
 	}
 	
 	public List<String> removeInvalidParentheses(String s) {
