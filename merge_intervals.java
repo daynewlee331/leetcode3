@@ -42,8 +42,7 @@ public class merge_intervals {
 				q.offer(intervals.get(i));
 			}else{
 				Interval tmp = new Interval();
-				if(intervals.get(i).start < current.start) tmp.start = intervals.get(i).start;
-				else tmp.start = current.start;
+				tmp.start = current.start;
 				if(intervals.get(i).end > current.end) tmp.end = intervals.get(i).end;
 				else tmp.end = current.end;
 				q.offer(tmp);
