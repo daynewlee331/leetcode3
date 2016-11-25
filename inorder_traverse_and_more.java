@@ -21,4 +21,22 @@ public class inorder_traverse_and_more {
 		}
 		return res;
 	}
+	
+	public boolean isValidBST(TreeNode root) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		while (root != null || !stack.isEmpty()) {
+			while (root != null) {
+				stack.push(root);
+				root = root.left;
+			}
+			root = stack.pop();
+			if (list.size() != 0 && list.get(list.size() - 1) >= root.val) {
+				return false;
+			}
+			list.add(root.val);
+			root = root.right;
+		}
+		return true;
+    }
 }
