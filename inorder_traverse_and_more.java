@@ -39,4 +39,8 @@ public class inorder_traverse_and_more {
 		}
 		return true;
     }
+	
+	public int kthSmallest(TreeNode root, int k) {
+        return 0;
+    }
 }
