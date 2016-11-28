@@ -5,9 +5,8 @@ import java.util.HashMap;
 public class sparse_matrix_multiplication {
 	
 	/*
-	 * 
-	 *       | a b c |   | l o |   | al+bm+cn ao+bp+cq |
-	 *  AB = | x y z | x | m p | = | xl+ym+zn xo+yp+zq |
+	 *       | a b c |   | l o |   | al+bm+cn  ao+bp+cq |
+	 *  AB = | x y z | x | m p | = | xl+ym+zn  xo+yp+zq |
      *                   | n q |
 	 * */
 	public int[][] multiply(int[][] A, int[][] B) {
