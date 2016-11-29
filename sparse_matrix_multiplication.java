@@ -34,7 +34,7 @@ public class sparse_matrix_multiplication {
 
 		for (int i = 0; i < A.length; i++) {
 			for (int m = 0; m < A[0].length; m++) {
-				if (A[i][m] != 0) {
+				if (mapB.containsKey(m) && A[i][m] != 0) {
 					for (Integer j : mapB.get(m).keySet()) {
 						res[i][j] += A[i][m] * mapB.get(m).get(j);
 					}
