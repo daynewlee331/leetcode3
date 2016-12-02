@@ -19,4 +19,6 @@ public class my_pow {
 		if (n % 2 == 0) return tmp * tmp;
 		else return tmp * tmp * x;
     }
+	
+	
 }
