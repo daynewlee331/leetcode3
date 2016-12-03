@@ -9,7 +9,9 @@ import java.util.Set;
 
 public class word_ladder {
 	public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
-        
+		List<List<String>> res = new ArrayList<List<String>>();
+		
+		return res;
     }
 	
 	public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
