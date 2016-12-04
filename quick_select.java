@@ -4,15 +4,10 @@ import java.util.ArrayList;
 
 public class quick_select {
 	public static void main(String[] args){
-		int[] test = {7,3,8,2,5,1,4};
+		int[] test = {3,2,1,5,6,4};
 		quick_select qs = new quick_select();
-		qs.myPartition(test, 0, test.length - 1);
-		for(Integer i : test){
-			System.out.print(i);
-			System.out.print(" ");
-		}
-		//int num = qs.quickSelect(test, 0, test.length - 1, 3);
-		//System.out.println(num);
+		int num = qs.quickSelect(test, 0, test.length - 1, 5);
+		System.out.println(num);
 	}
 	
 	public int findKthSmallest(int[] nums, int k) {
@@ -21,9 +16,11 @@ public class quick_select {
         
     }
 	
-	//TODO to be working on
 	public int quickSelect(int[] nums, int lo, int hi, int k) {
-        return 0;
+        	int p = partition(nums, lo, hi);
+            if(p - lo == k - 1) return nums[p];
+            if(p - lo > k - 1) return quickSelect(nums, lo, p - 1, k);
+            return quickSelect(nums, p + 1, hi, k - (p - lo + 1));
     }
 	
 	// Utility method to swap arr[i] and arr[j]
