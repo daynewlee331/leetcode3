@@ -12,11 +12,12 @@ public class tree_level_order_traverse {
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
 		List<Integer> buffer = null;
+		TreeNode tmp = null;
 		while(!queue.isEmpty()){
 			int size = queue.size();
 			buffer = new ArrayList<Integer>();
 			for(int i = 0; i < size; i ++){
-				TreeNode tmp = queue.poll();
+				tmp = queue.poll();
 				buffer.add(tmp.val);
 				if(tmp.left != null)
 					queue.add(tmp.left);
