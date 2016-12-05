@@ -3,16 +3,30 @@ package leetcode3;
 public class remove_duplicates_in_sorted_array {
 	public static void main(String[] args){
 		int[] test = {1,2,2,3,4,4,4,4,5,5,5,6,7,7,7,7,7,8};
+		int[] test2 = {1,1};
 		remove_duplicates_in_sorted_array rd = new remove_duplicates_in_sorted_array();
+		//rd.removeDuplicates(test);
 		rd.removeDuplicates2(test);
 	}
 	
+	//80. Remove Duplicates from Sorted Array II
 	public int removeDuplicates2(int[] nums) {
 		
 	}
 	
+	public int myRemoveDuplicates(int[] nums){
+		int i = 0;
+		for(int n: nums){
+			if(n != nums[i]){
+				i ++;
+				nums[i] = n;
+			}
+		}
+		return i + 1;
+	}
+	
+	//newer version
 	public int removeDuplicates(int[] nums) {
-		if(nums == null || nums.length < 1) return 0;
 		if(nums.length == 1) return 1;
 		int count = 0;
         int i = 0;
@@ -24,7 +38,6 @@ public class remove_duplicates_in_sorted_array {
         		if(buff){
         			i ++;
         			nums[i] = nums[j];
-        			j = i + 1;
         			buff = false;
         			continue;
         		}
@@ -37,4 +50,16 @@ public class remove_duplicates_in_sorted_array {
         }
         return count + 1;
     }
+	
+	public int standardRemoveDuplicates(int[] nums) {
+		int i = 1; //iterator thru array
+        int j = 0; //current index
+        for (; i<nums.length; i++) { 
+            if (nums[i] != nums[j]) { //new number
+                j++; //move current index
+                nums[j] = nums[i]; //fill current index with new number
+            } 
+        }
+    return j+1;
+	}
 }
