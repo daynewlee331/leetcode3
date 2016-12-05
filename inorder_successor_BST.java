@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class inorder_successor_BST {
+	//standard solution
 	public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
 		TreeNode res = null;
 		while(root != null){
@@ -18,6 +19,7 @@ public class inorder_successor_BST {
 		return res;
 	}
 	
+	//naive solution
 	public TreeNode myInorderSuccessor(TreeNode root, TreeNode p) {
         if(root == null) return null;
         List<TreeNode> list = new ArrayList<TreeNode>();
