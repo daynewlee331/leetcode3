@@ -11,7 +11,28 @@ public class remove_duplicates_in_sorted_array {
 	
 	//80. Remove Duplicates from Sorted Array II
 	public int removeDuplicates2(int[] nums) {
-		
+		//define at most k times of duplicate numbers
+		final int k = 2;
+		//check if it is an empty array
+		if(nums.length == 0) return 0;
+		//start pointer of new array
+		int m = 1;
+		// count the time of duplicate numbers occurence
+		int count = 1;
+		for(int i = 1; i < nums.length; i ++){
+			if(nums[i - 1] == nums[i]){
+				if(count < k){
+					nums[m] = nums[i];
+					m ++;
+				}
+				count ++;
+			}else{
+				count = 1;
+				nums[m] = nums[i];
+				m ++;
+			}
+		}
+		return m;
 	}
 	
 	public int myRemoveDuplicates(int[] nums){
