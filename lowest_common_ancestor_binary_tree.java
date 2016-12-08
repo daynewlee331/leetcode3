@@ -6,7 +6,8 @@ public class lowest_common_ancestor_binary_tree {
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
         if(left != null && right != null) return root;
-        else if(left != null && right == null) return left;
-        else return right;
+        return left != null? left : right;
+        //else if(left != null && right == null) return left;
+        //else return right;
     }
 }
