@@ -1,6 +1,7 @@
 package leetcode3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class all_subsets_iterative {
@@ -8,6 +9,26 @@ public class all_subsets_iterative {
 		int[] test = {1,2,3}; 
 		all_subsets_iterative as = new all_subsets_iterative();
 		as.subsets(test);
+	}
+
+	// leetcode 90 Subsets II
+	public List<List<Integer>> subsetsWithDup(int[] nums) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (nums == null || nums.length < 1) return null;
+		Arrays.sort(nums);
+		subsetsWithDup_helper(0, nums, res, new ArrayList<Integer>());
+		return res;
+	}
+	
+	public void subsetsWithDup_helper(int start, int[] nums, List<List<Integer>> res, List<Integer> cur){
+		res.add(new ArrayList<>(cur));
+		if(cur.size() > nums.length) return;
+		for(int i = start; i < nums.length; i ++){
+			if(i > start && nums[i] == nums[i - 1]) continue;
+			cur.add(nums[i]);
+			subsetsWithDup_helper(i + 1, nums, res, cur);
+			cur.remove(cur.size() - 1);
+		}
 	}
 	
 	public List<List<Integer>> subsets(int[] nums) {
@@ -26,7 +47,7 @@ public class all_subsets_iterative {
 	}
 	
 	//solution 2
-	public List<List<Integer>> subsets2(int[] nums) {
+	public List<List<Integer>> subsets_recursion(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         res.add(new ArrayList<Integer>());
         List<Integer> arr = new ArrayList<Integer>();
