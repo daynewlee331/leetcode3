@@ -10,33 +10,13 @@ public class print_tree_path {
 		TreeNode right;
 		TreeNode(int x) { val = x; }}
 	
-	/*
-	public List<String> binaryTreePaths(TreeNode root) {
-        ArrayList<Integer> arr = new ArrayList<Integer>();
-        List<String> res = new ArrayList<String>();
-        if(root == null) return res;
-        binaryTreePathFinder(root, arr, res);
-        return res;
+	//leetcode: 104. Maximum Depth of Binary Tree
+	public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        return Math.max(left, right) + 1;
     }
-    
-    public void binaryTreePathFinder(TreeNode root, ArrayList<Integer> arr, List<String> res){
-        if(root == null) return;
-        arr.add(root.val);
-        if(root.left == null && root.right == null){
-            StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < arr.size(); i ++){
-                sb.append(arr.get(i));
-                sb.append("->");
-            }
-            sb.setLength(sb.length() - 2);
-            res.add(sb.toString());
-            arr.remove(arr.size() - 1);
-            return;
-        }
-        binaryTreePathFinder(root.left, arr, res);
-        binaryTreePathFinder(root.right, arr, res);
-        arr.remove(arr.size() - 1);
-    }*/
 	
 	public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
