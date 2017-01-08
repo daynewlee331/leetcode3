@@ -10,6 +10,20 @@ public class print_tree_path {
 		TreeNode right;
 		TreeNode(int x) { val = x; }}
 	
+	//leetcode 111. Minimum Depth of Binary Tree
+	public int minDepth(TreeNode root) {
+        int height = getHeight(root);
+        return height;
+    }
+	
+	public int getHeight(TreeNode root){
+		if(root == null) return 0;
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+        if(left == 0 || right == 0) return Math.max(left, right) + 1;
+        return Math.min(left, right) + 1;
+	}
+	
 	//leetcode 110. Balanced Binary Tree
 	public boolean isBalanced(TreeNode root) {
         int height = height(root);
