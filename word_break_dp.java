@@ -1,6 +1,9 @@
 package leetcode3;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class word_break_dp {
@@ -12,6 +15,30 @@ public class word_break_dp {
 		dict.add("a");
 		//dict.add("code");
 		wb.wordBreak(st, dict);
+	}
+	
+	//leetcode 140 wordbreak 2
+	public List<String> wordBreak(String s, List<String> wordDict) {
+        List<String> res = wordBreakHelper(s, wordDict, new HashMap<String, LinkedList<String>>());
+        return res;
+    }
+	
+	public List<String> wordBreakHelper(String s, List<String> wordDict, HashMap<String, LinkedList<String>> map){
+		if(map.containsKey(s)) return map.get(s);
+		LinkedList<String> res = new LinkedList<String>();
+		if(s.length() == 0){
+			res.add("");
+		}
+		for(String st: wordDict){
+			if(s.startsWith(st)){
+				List<String> subList = wordBreakHelper(s.substring(st.length()), wordDict, map);
+				for(String sub: subList){
+					res.add(st + (sub.isEmpty()? "" : " ") + sub);
+				}
+			}
+		}
+		map.put(s, res);
+		return res;
 	}
 	
 	public boolean wordBreak(String s, Set<String> wordDict) {
