@@ -10,6 +10,21 @@ public class print_tree_path {
 		TreeNode right;
 		TreeNode(int x) { val = x; }}
 	
+	//leetcode 110. Balanced Binary Tree
+	public boolean isBalanced(TreeNode root) {
+        int height = height(root);
+        return height != -1;
+    }
+	
+	public int height(TreeNode root){
+		if(root == null) return 0;
+        int left = height(root.left);
+        int right = height(root.right);
+        if(left == -1 || right == -1) return -1;
+        if(Math.abs(left - right) > 1) return -1;
+        return Math.max(left, right) + 1;
+	}
+	
 	//leetcode: 104. Maximum Depth of Binary Tree
 	public int maxDepth(TreeNode root) {
         if(root == null) return 0;
