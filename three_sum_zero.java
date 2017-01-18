@@ -10,30 +10,29 @@ import java.util.List;
 public class three_sum_zero {
 	public List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if (nums == null || nums.length < 3)
-			return res;
+		if(nums == null || nums.length < 3) return res;
 		Arrays.sort(nums);
-		for (int i = 0; i < nums.length - 2; i++) {
-			int j = i + 1;
-			int k = nums.length - 1;
-			while(j < k && j + 1 < k && nums[j] == nums[j + 1]) j ++;
-		    while(j < k && k - 1 > j && nums[k] == nums[k - 1]) k --;
-			while(j < k){
-			    if(nums[i] > 0) break;
-			    int sum = nums[i] + nums[j] + nums[k];
-			    
+		for(int i = 0; i <= nums.length - 3; i ++){
+			if(i - 1 >= 0 && nums[i] == nums[i - 1]) continue; //avoid duplicates
+			if(nums[i] > 0) break;
+			int p = i + 1;
+			int q = nums.length - 1;
+			while(p < q){
+				int sum = nums[i] + nums[p] + nums[q];
 				if(sum == 0){
-					res.add(Arrays.asList(nums[i], nums[j], nums[k]));
-					j ++;
-					k --;
+					res.add(Arrays.asList(nums[i], nums[p], nums[q]));
+					p ++;
+					q --;
+					while(p < q && nums[p] == nums[p - 1]) p ++; //avoid duplicates
+					while(p < q && nums[q] == nums[q + 1]) q --; //avoid duplicates
 				}else if(sum < 0){
-					j ++;
-				}else if(sum > 0){
-					k --;
+					p ++;
+				}else{
+					q --;
 				}
 			}
-			while(nums[i] == nums[i + 1] && i < nums.length - 2) i ++;
 		}
+		
 		return res;
 	}
 }
