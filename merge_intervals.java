@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import fb_review.Interval;
+
 public class merge_intervals {
 	class Interval {
 		int start;
@@ -17,38 +19,25 @@ public class merge_intervals {
 	
 	
 	public List<Interval> merge(List<Interval> intervals) {
-		if(intervals.size() < 1) return intervals;
-        Collections.sort(intervals,new Comparator<Interval>(){
+		List<Interval> res = new ArrayList<Interval>();
+		if(intervals.size() < 1) return res;
+		Collections.sort(intervals, new Comparator<Interval>(){
 			@Override
 			public int compare(Interval o1, Interval o2) {
 				return o1.start - o2.start;
 			}
-			
 		});
 		
-		PriorityQueue<Interval> q = new PriorityQueue<Interval>(intervals.size(), new Comparator<Interval>(){
-			@Override
-			public int compare(Interval o1, Interval o2) {
-				// TODO Auto-generated method stub
-				return o2.end - o1.end;
-			}});
-		
-		// start with the first meeting, put it to a meeting room
-	    q.offer(intervals.get(0));
-		for(int i = 1; i < intervals.size(); i ++){
-			Interval current = q.poll();
-			if(intervals.get(i).start > current.end){//can't merge
-				q.offer(current);
-				q.offer(intervals.get(i));
-			}else{
-				Interval tmp = new Interval();
-				tmp.start = current.start;
-				if(intervals.get(i).end > current.end) tmp.end = intervals.get(i).end;
-				else tmp.end = current.end;
-				q.offer(tmp);
+		Interval pre = null;
+		for(Interval inter: intervals){
+			if(pre == null || inter.start > pre.end){
+				res.add(inter);
+				pre = inter;
+			}else if(pre.end >= inter.start){
+				int end = Math.max(pre.end, inter.end);
+				pre.end = end;
 			}
 		}
-		List<Interval> res = new ArrayList<Interval>(q);
-	    return res;
+		return res;
     }
 }
