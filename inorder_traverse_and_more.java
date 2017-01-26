@@ -9,15 +9,15 @@ public class inorder_traverse_and_more {
 		List<Integer> res = new ArrayList<Integer>();
 		if(root == null) return res;
 		Stack<TreeNode> stack = new Stack<TreeNode>();
-		TreeNode current = root;
-		while(current != null || !stack.isEmpty()){
-			while(current != null){
-				stack.push(current);
-				current = current.left;
+		while(root != null || !stack.isEmpty()){
+			while(root != null){
+				stack.push(root);
+				if(root.left != null) root = root.left;
+				else break;
 			}
-			current = stack.pop();
-			res.add(current.val);
-			current = current.right;
+			TreeNode node = stack.pop();
+			res.add(node.val);
+			root = node.right;
 		}
 		return res;
 	}
