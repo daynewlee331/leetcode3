@@ -41,20 +41,18 @@ public class inorder_traverse_and_more {
     }
 	
 	public int kthSmallest(TreeNode root, int k) {
-		ArrayList<Integer> list = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
+		int count = 0;
 		while(root != null || !stack.isEmpty()){
 			while(root != null){
-				stack.add(root);
+				stack.push(root);
 				root = root.left;
 			}
-			root = stack.pop();
-			list.add(root.val);
-			if(list.size() == k){
-				return list.get(list.size() - 1);
-			}
-			root = root.right;
+			TreeNode node = stack.pop();
+			count ++;
+			if(count == k) return node.val;
+			root = node.right;
 		}
-        return 0;
+		return 0;
     }
 }
