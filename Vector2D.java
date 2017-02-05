@@ -1,44 +1,40 @@
 package leetcode3;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class Vector2D implements Iterator<Integer> {
-	Queue<Integer> queue = null;
 	List<List<Integer>> buffer = null;
-	int index = 0;
+	int currentRow = 0;
+	int currentCol = 0;
+	
 	public Vector2D(List<List<Integer>> vec2d) {
-		if(vec2d == null) return;
-		this.index = 0;
-		this.buffer = vec2d;
-        this.queue = new LinkedList<Integer>();
-        while(this.index < this.buffer.size() && this.buffer.get(index).size() == 0){
-        	this.index ++;
-        }
-        if(this.buffer.size() > 0 && this.index < this.buffer.size()){
-        	for(int num: this.buffer.get(index)) this.queue.offer(num);
-            this.index ++;
+        this.buffer = vec2d;
+        this.currentRow = 0;
+        this.currentCol = 0;
+        while(this.currentRow < this.buffer.size()){
+        	if(this.buffer.get(currentRow).size() == 0) this.currentRow ++;
+        	else break;
         }
     }
 
     @Override
     public Integer next() {
-        return queue.poll();
+        int res = this.buffer.get(this.currentRow).get(currentCol);
+        this.currentCol ++;
+        return res;
     }
 
     @Override
     public boolean hasNext() {
-        if(!this.queue.isEmpty()) return true;
-        if(this.index >= this.buffer.size()) return false;
-        while(this.index < this.buffer.size() && this.buffer.get(index).size() == 0){
-        	this.index ++;
+    	if(this.currentRow >= this.buffer.size()) return false;
+        if(this.currentCol < this.buffer.get(this.currentRow).size()) return true;
+        this.currentCol = 0;
+        this.currentRow ++;
+        while(this.currentRow < this.buffer.size()){
+        	if(this.buffer.get(currentRow).size() == 0) this.currentRow ++;
+        	else break;
         }
-        if(this.buffer.size() > 0 && this.index < this.buffer.size()){
-        	for(int num: this.buffer.get(index)) this.queue.offer(num);
-            this.index ++;
-        }
-        return !this.queue.isEmpty();
+        return this.currentRow < this.buffer.size();
     }
 }
