@@ -1,5 +1,7 @@
 package leetcode3;
 
+import java.util.Arrays;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,6 +18,39 @@ public class serialize_deserialize_tree {
 		TreeNode res = st.deserialize("1,2,3,4,5,null,null,7,null,6,9,10,11,null,null,null,null,15,null,null,null");
 		System.out.println(st.serialize(res));
 	}
+	
+	 public String serializePre(TreeNode root) {
+	    	StringBuilder builder = new StringBuilder();
+	        serializeHelper(root, builder);
+	        builder.setLength(builder.length() - 1);
+	        return builder.toString();
+	    }
+	    
+	    public void serializeHelper(TreeNode root, StringBuilder builder){
+	    	if(root == null) {
+	    		builder.append("#,");
+	    		return;
+	    	}
+	    	builder.append(root.val + ",");
+	    	serializeHelper(root.left, builder);
+	    	serializeHelper(root.right, builder);
+	    }
+
+	    // Decodes your encoded data to tree.
+	    public TreeNode deserializePre(String data) {
+	    	Deque<String> queue = new LinkedList<String>(Arrays.asList(data.split(",")));
+	    	return deserializeHelper(queue);
+	    }
+	    
+	    public TreeNode deserializeHelper(Deque<String> queue){
+	    	if(queue.size() == 0) return null;
+	    	String node = queue.pop();
+	    	if(node.equals("#")) return null;
+	    	TreeNode root = new TreeNode(Integer.parseInt(node));
+	    	root.left = deserializeHelper(queue);
+	    	root.right = deserializeHelper(queue);
+	    	return root;
+	    }
 	
 	// Encodes a tree to a single string.
     public String serialize(TreeNode root) {
