@@ -8,7 +8,7 @@ public class food_menu {
 	public static void main(String[] args) {
 		food_menu sol = new food_menu();
 		double[] prices = { 0.32, 1.30, 3.37, 0.65, 0.95, 2.30 };
-		List<List<Double>> result = sol.price_combo(prices, 2.57);
+		List<List<Double>> result = sol.getAllCombo(prices, 2.57);
 		for (int i = 0; i < result.size(); i++) {
 			System.out.println("Combination " + i + ":");
 			for (int j = 0; j < result.get(i).size(); j++)
@@ -17,31 +17,28 @@ public class food_menu {
 		}
 	}
 	
-	public List<List<Double>> price_combo(double[] prices, double target){
+	public List<List<Double>> getAllCombo(double[] prices, double target){
 		List<List<Double>> res = new ArrayList<List<Double>>();
-		if(prices == null || prices.length < 1 || target == 0) return res;
 		int[] tmp = new int[prices.length];
 		for(int i = 0; i < prices.length; i ++){
-			tmp[i] = (int) (prices[i] * 100);
+			tmp[i] = (int)(prices[i] * 100);
 		}
 		Arrays.sort(tmp);
-		DFS(res, (int)(target * 100), tmp, new ArrayList<Integer>());
+		getCombo(tmp, (int)(target * 100), res, new ArrayList<Integer>(), 0);
 		return res;
 	}
 	
-	public void DFS(List<List<Double>> res, int target, int[] prices, List<Integer> cur){
+	public void getCombo(int[] prices, int target, List<List<Double>> res, List<Integer> cur, int start){
 		if(target < 0) return;
-		if(target == 0){
+		if(target == 0) {
 			List<Double> sub = new ArrayList<Double>();
-			for(Integer num: cur){
-				sub.add(num / 100.0);
-			}
+			for(int e: cur) sub.add(e / 100.0);
 			res.add(sub);
 			return;
 		}
-		for(int i = 0; i < prices.length; i ++){
+		for(int i = start; i < prices.length; i ++){
 			cur.add(prices[i]);
-			DFS(res, target - prices[i], prices, cur);
+			getCombo(prices, target - prices[i], res, cur, i);
 			cur.remove(cur.size() - 1);
 		}
 	}
