@@ -52,10 +52,12 @@ public class Twitter {
 			}
 		});
 		if (this.follow.containsKey(userId)) {
+			/*
 			for (Integer uid : this.follow.get(userId)) {
 				if (this.userTweets.containsKey(uid))
 					for (Tweet t : this.userTweets.get(uid)) pq.add(t);
-			}
+			}*/
+			this.follow.get(userId).stream().filter(f -> userTweets.containsKey(f)).forEach(f -> userTweets.get(f).forEach(pq::add));
 		}
 		if (this.userTweets.containsKey(userId)) {
 			for (Tweet t : this.userTweets.get(userId)) pq.add(t);
