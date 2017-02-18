@@ -3,7 +3,11 @@ package leetcode3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NQueen {
+public class NQueenTwo {
+	public int totalNQueens(int n) {
+        return solveNQueens(n).size();
+    }
+	
 	public List<List<String>> solveNQueens(int n) {
 		List<List<String>> res = new ArrayList<List<String>>();
         if(n < 1) return res;
