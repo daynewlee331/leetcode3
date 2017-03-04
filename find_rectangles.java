@@ -44,7 +44,6 @@ public class find_rectangles {
 				|| set.contains(new ArrayList<>(Arrays.asList(row, col)))) return;
 		set.add(new ArrayList<>(Arrays.asList(row, col)));
 		
-		
 		if(row + 1 >= matrix.length && (col + 1 < matrix[0].length && matrix[row][col + 1] == 1)){
 			cur.add(row); cur.add(col);
 			return;
