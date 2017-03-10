@@ -1,9 +1,5 @@
 package leetcode3;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 public class Diagonal_Traverse {
 	
 	public static void main(String[] args){
