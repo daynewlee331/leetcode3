@@ -9,23 +9,25 @@ public class sort_color {
 	
 	public void sortColors(int[] nums) {
 		if(nums == null || nums.length < 1) return;
-		int left = 0, right = nums.length - 1;
-		int i = 0;
-		while(i <= right){
-			if(nums[i] == 0){
-				swap(i, left, nums);
-				i ++;
-				left ++;
-			}else if(nums[i] == 1){
-				i ++;
-			}else if(nums[i] == 2){ //blue
-				swap(i, right, nums);
-				right --;
-			}
-		}
+        int left = 0, right = nums.length - 1;
+        while(left < nums.length && nums[left] == 0) left ++;
+        while(right >= 0 && nums[right] == 2) right --;
+        int i = left;
+        while(i <= right){
+        		if(nums[i] == 0){
+        			swap(nums, i, left);
+        			left ++;
+        			i ++;
+        		}else if(nums[i] == 2){
+        			swap(nums, i, right);
+        			right --;
+        		}else{
+        			i ++;
+        		}
+        }
 	}
 	
-	public void swap(int i, int j, int[] arr){
+	public void swap(int[] arr, int i, int j){
 		int tmp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = tmp;
