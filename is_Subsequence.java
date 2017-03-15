@@ -6,12 +6,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class is_Subsequence {
-	public static void main(String[] args){
-		List<Integer> list = new ArrayList<Integer>();
-		list.addAll(Arrays.asList(1,3,5,6));
-		int a = Collections.binarySearch(list, 7);
-		int b = Collections.binarySearch(list, 5);
-		System.out.println(a + " " + b);
+	public boolean isSubsequenceNaive(String s, String t){
+		if(s == null || t == null) return false;
+        if(s.length() == 0) return true;
+		int index = 0;
+		for(int i = 0; i < t.length(); i ++){
+			if(t.charAt(i) == s.charAt(index)) index ++;
+			if(index == s.length()) return true;
+		}
+		return false;
 	}
 	
 	public boolean isSubsequence(String s, String t) {
