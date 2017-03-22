@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Next_Greater_Element_Two {
 	public static void main(String[] args){
 		Next_Greater_Element_Two sol = new Next_Greater_Element_Two();
-		sol.nextGreaterElements(new int[]{1,2,5,4});
+		sol.nextGreaterElements(new int[]{1,2,1});
 	}
 	
 	public int[] nextGreaterElements(int[] nums) {
@@ -17,9 +17,9 @@ public class Next_Greater_Element_Two {
 		}
 		int[] res = new int[m];
 		for(int i = m - 1; i >= 0; i --){
-			res[m] = -1;
-			if(stack.peek() <= nums[i]) stack.pop();
-			if(stack.size() > 0) res[m] = stack.peek();
+			res[i] = -1;
+			while(!stack.isEmpty() && stack.peek() <= nums[i]) stack.pop();
+			if(stack.size() > 0) res[i] = stack.peek();
 			stack.push(nums[i]);
 		}
 		return res;
