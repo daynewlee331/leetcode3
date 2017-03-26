@@ -1,6 +1,5 @@
 package leetcode3;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class Longest_Substring_Without_Repeating {
