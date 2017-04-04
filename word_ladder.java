@@ -8,35 +8,38 @@ import java.util.Queue;
 import java.util.Set;
 
 public class word_ladder {
-	public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
-		List<List<String>> res = new ArrayList<List<String>>();
-		
-		return res;
-    }
-	
 	public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-        Queue<String> q = new LinkedList<String>();
-        wordList.add(endWord);
-        wordList.add(beginWord);
+		HashSet<String> wordSet = new HashSet<String>(wordList);
+        if(!wordSet.contains(endWord)) return 0;
+        HashSet<String> sq = new HashSet<String>();
+        HashSet<String> eq = new HashSet<String>();
         HashSet<String> visited = new HashSet<String>();
-        q.add(beginWord);
-        int length = 1;
-        visited.add(beginWord);
-        
-		while (!q.isEmpty()) {
-			length++;
-			int size = q.size();
-			for (int i = 0; i < size; i++) {
-				String cur = q.poll();
-				ArrayList<String> neighors = nextWords(cur, wordList);
-				for (String st : neighors) {
-					if (!visited.contains(st)) {
-						if(st.equals(endWord)) return length;
-						visited.add(st);
-						q.add(st);
+        sq.add(beginWord); eq.add(endWord);
+        int len = 1;
+		while (!sq.isEmpty() && !eq.isEmpty()) {
+			if(sq.size() > eq.size()){
+				HashSet<String> tmp = sq;
+				sq = eq;
+				eq = tmp;
+			}
+			HashSet<String> buffer = new HashSet<String>();
+			for(String cur: sq){
+				StringBuilder builder = null;
+				for (int i = 0; i < cur.length(); i++) {
+					for (char c = 'a'; c <= 'z'; c++) {
+						builder = new StringBuilder(cur);
+						builder.setCharAt(i, c);
+						String neighbor = builder.toString();
+						if(eq.contains(neighbor)) return len + 1;
+						if (wordSet.contains(neighbor) && !visited.contains(neighbor)) {
+							visited.add(neighbor);
+							buffer.add(neighbor);
+						}
 					}
 				}
 			}
+			sq = buffer;
+			len++;
 		}
 		return 0;
     }
